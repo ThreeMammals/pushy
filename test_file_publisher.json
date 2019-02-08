@@ -1,0 +1,18 @@
+{
+    "Message": [1, 2, 3, 4, 5],
+    "MessageAttributes": {
+        "causationId": {
+            "DataType": "String",
+            "StringValue": "0"
+        },
+        "messageId": {
+            "DataType": "String",
+            "StringValue": "5f76a128-2b7c-11e9-988e-72000522a310"
+        },
+        "correlationId": {
+            "DataType": "String",
+            "StringValue": "5f76aeac-2b7c-11e9-a3d6-72000522a310"
+        }
+    },
+    "Subject": "Pushy"
+}
