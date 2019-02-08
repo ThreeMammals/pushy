@@ -7,7 +7,7 @@ use Ramsey\Uuid\Uuid;
 
 final class SnsPublisher
 {
-	protected $client;
+    protected $client;
     protected $topic_arn;
 
     public function __construct($topic_arn)
@@ -49,7 +49,7 @@ final class SnsPublisher
     }
     
     private function uuid(): string {
-		$uuid1 = Uuid::uuid1();
+        $uuid1 = Uuid::uuid1();
         return $uuid1->toString();
 	}
 }
