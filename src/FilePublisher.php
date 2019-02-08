@@ -8,11 +8,13 @@ use Ramsey\Uuid\Uuid;
 final class FilePublisher
 {
     protected $path;
-    protected $type;
+		protected $type;
+		protected $uuidProvier;
 
-    public function __construct($path)
+    public function __construct($path, UUIDProvider $uuidProvider)
     {
-		$this->path = $path;
+				$this->path = $path;
+				$this->uuidProvier = $uuidProvider;
     }
 
     public function publish($data): int
@@ -32,19 +34,14 @@ final class FilePublisher
 				],
 				'messageId'     => [
 					'DataType'    => 'String',
-					'StringValue' => $this->uuid(),
+					'StringValue' => $this->uuidProvier->uuid(),
 				],
 				'correlationId' => [
 					'DataType'    => 'String',
-					'StringValue' => $this->uuid(),
+					'StringValue' => $this->uuidProvier->uuid(),
 				],
 			],
 			'Subject'           => 'Pushy',
 		]);
     }
-    
-    private function uuid(): string {
-		$uuid1 = Uuid::uuid1();
-        return $uuid1->toString();
-	}
 }

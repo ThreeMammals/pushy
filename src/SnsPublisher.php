@@ -9,10 +9,12 @@ final class SnsPublisher
 {
     protected $client;
     protected $topic_arn;
+    protected $uuidProvier;
 
-    public function __construct($topic_arn)
+    public function __construct($topic_arn, UUIDProvider $uuidProvider)
     {
         $this->topic_arn = $topic_arn;
+        $this->uuidProvier = $uuidProvider;
         $this->client = SnsClient::factory(array(
             'region'  => 'eu-west-1',
             'version' => '2010-03-31'
@@ -37,19 +39,14 @@ final class SnsPublisher
 				],
 				'messageId'     => [
 					'DataType'    => 'String',
-					'StringValue' => $this->uuid(),
+					'StringValue' => $this->uuidProvier->uuid(),
 				],
 				'correlationId' => [
 					'DataType'    => 'String',
-					'StringValue' => $this->uuid(),
+					'StringValue' => $this->uuidProvier->uuid(),
 				],
 			],
 			'Subject'           => 'Pushy',
 		];
     }
-    
-    private function uuid(): string {
-        $uuid1 = Uuid::uuid1();
-        return $uuid1->toString();
-	}
 }

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require __DIR__ . "/../src/SnsPublisher.php";
+require __DIR__ . "/../src/UUIDProvider.php";
 
 use PHPUnit\Framework\TestCase;
 use Aws\Sns\SnsClient;
@@ -15,7 +16,7 @@ final class SnsPublisherTest extends TestCase
     function setUp()
     {
         $topic_arn = 'arn:aws:sns:eu-west-1:940731442544:dev-InputEvent';
-        $this->publisher = new SnsPublisher($topic_arn);
+        $this->publisher = new SnsPublisher($topic_arn, new UUIDProvider());
     }
 
     public function testHappyPath(): void
