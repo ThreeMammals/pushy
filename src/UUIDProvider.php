@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+namespace Pushy;
+
 use Ramsey\Uuid\Uuid;
 
 final class UUIDProvider

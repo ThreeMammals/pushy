@@ -1,27 +1,29 @@
 <?php
 declare(strict_types=1);
 
+namespace Pushy;
+
 use Aws\Sns\SnsClient;
 use Aws\Result;
 use Ramsey\Uuid\Uuid;
 
-final class SnsPublisher
+final class SnsPublisher implements Publisher
 {
     protected $client;
     protected $topic_arn;
-    protected $uuidProvier;
+    protected $uuidProvider;
 
     public function __construct($topic_arn, UUIDProvider $uuidProvider)
     {
         $this->topic_arn = $topic_arn;
-        $this->uuidProvier = $uuidProvider;
+        $this->uuidProvider = $uuidProvider;
         $this->client = SnsClient::factory(array(
             'region'  => 'eu-west-1',
             'version' => '2010-03-31'
         ));
     }
 
-    public function publish($data): Result
+    public function publish($data)
     {
         $json = json_encode($data);
         $message = $this->prepare($json);
@@ -39,11 +41,11 @@ final class SnsPublisher
 				],
 				'messageId'     => [
 					'DataType'    => 'String',
-					'StringValue' => $this->uuidProvier->uuid(),
+					'StringValue' => $this->uuidProvider->uuid(),
 				],
 				'correlationId' => [
 					'DataType'    => 'String',
-					'StringValue' => $this->uuidProvier->uuid(),
+					'StringValue' => $this->uuidProvider->uuid(),
 				],
 			],
 			'Subject'           => 'Pushy',

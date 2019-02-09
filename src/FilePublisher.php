@@ -1,23 +1,25 @@
 <?php
 declare(strict_types=1);
 
+namespace Pushy;
+
 use Aws\Sns\SnsClient;
 use Aws\Result;
 use Ramsey\Uuid\Uuid;
 
-final class FilePublisher
+final class FilePublisher implements Publisher
 {
     protected $path;
 		protected $type;
-		protected $uuidProvier;
+		protected $uuidProvider;
 
     public function __construct($path, UUIDProvider $uuidProvider)
     {
 				$this->path = $path;
-				$this->uuidProvier = $uuidProvider;
+				$this->uuidProvider = $uuidProvider;
     }
 
-    public function publish($data): int
+    public function publish($data)
     {
 				$location = $this->path . '.json';
         $message = $this->prepare($data);
@@ -34,11 +36,11 @@ final class FilePublisher
 				],
 				'messageId'     => [
 					'DataType'    => 'String',
-					'StringValue' => $this->uuidProvier->uuid(),
+					'StringValue' => $this->uuidProvider->uuid(),
 				],
 				'correlationId' => [
 					'DataType'    => 'String',
-					'StringValue' => $this->uuidProvier->uuid(),
+					'StringValue' => $this->uuidProvider->uuid(),
 				],
 			],
 			'Subject'           => 'Pushy',

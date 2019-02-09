@@ -1,15 +1,16 @@
 <?php
 declare(strict_types=1);
 
-require __DIR__ . "/../src/UUIDProvider.php";
+namespace Pushy\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Pushy;
 
 final class UUIDProviderTest extends TestCase
 {
     public function testHappyPath(): void
     {      
-        $uuidProvider = new UUIDProvider();
+        $uuidProvider = new \Pushy\UUIDProvider();
         
         $this->assertNotNull(
             $uuidProvider->uuid()

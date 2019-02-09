@@ -1,4 +1,8 @@
 <?php
+declare(strict_types=1);
+
+namespace Pushy;
+
 // This hook runs on every post save, update etc
 function save_post_hook_tomgp( $post_ID, $post, $update ) {
 	$json = wp_json_encode( $post);

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-require __DIR__ . "/../src/SnsPublisher.php";
-require __DIR__ . "/../src/UUIDProvider.php";
+namespace Pushy\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Aws\Sns\SnsClient;
 use Aws\Result;
+use Pushy;
 
 final class SnsPublisherTest extends TestCase
 {
@@ -16,7 +16,7 @@ final class SnsPublisherTest extends TestCase
     function setUp()
     {
         $topic_arn = 'arn:aws:sns:eu-west-1:940731442544:dev-InputEvent';
-        $this->publisher = new SnsPublisher($topic_arn, new UUIDProvider());
+        $this->publisher = new \Pushy\SnsPublisher($topic_arn, new \Pushy\UUIDProvider());
     }
 
     public function testHappyPath(): void

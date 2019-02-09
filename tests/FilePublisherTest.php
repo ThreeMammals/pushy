@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-require __DIR__ . "/../src/FilePublisher.php";
-require __DIR__ . "/../src/UUIDProvider.php";
+namespace Pushy\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Pushy;
 
-final class SnsPublisherTest extends TestCase
+final class FilePublisherTest extends TestCase
 {
     private $publisher; 
     private $client; 
@@ -15,7 +15,7 @@ final class SnsPublisherTest extends TestCase
     function setUp()
     {
         $this->path = 'test_file_publisher';
-        $this->publisher = new FilePublisher($this->path, new UUIDProvider());
+        $this->publisher = new \Pushy\FilePublisher($this->path, new \Pushy\UUIDProvider());
     }
 
     public function testHappyPath(): void
