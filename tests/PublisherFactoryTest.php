@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace Pushy\Tests;
 
@@ -11,14 +11,14 @@ final class PublisherFactoryTests extends TestCase
     private $path;
     private $publisherFactory;
 
-    function setUp()
+    public function setUp()
     {
         $this->path = 'test_file_publisher';
         $this->publisherFactory = new \Pushy\PublisherFactory(new \Pushy\UUIDProvider());
     }
 
     public function testShouldReturnFilePublisher(): void
-    {      
+    {
         $type = 'FilePublisher';
         $config = (object) ['type' => $type, 'location' => $this->path];
         $publisher = $this->publisherFactory->get($config);
@@ -26,7 +26,7 @@ final class PublisherFactoryTests extends TestCase
     }
 
     public function testShouldReturnSnsPublisher(): void
-    {      
+    {
         $type = 'SNSPublisher';
         $config = (object) ['type' => $type, 'location' => $this->path];
         $publisher = $this->publisherFactory->get($config);

@@ -1,10 +1,9 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace Pushy;
 
 use Aws\Sns\SnsClient;
-use Aws\Result;
 use Ramsey\Uuid\Uuid;
 
 final class SNSPublisher implements Publisher
@@ -18,8 +17,8 @@ final class SNSPublisher implements Publisher
         $this->topic_arn = $topic_arn;
         $this->uuidProvider = $uuidProvider;
         $this->client = SnsClient::factory(array(
-            'region'  => 'eu-west-1',
-            'version' => '2010-03-31'
+            'region' => 'eu-west-1',
+            'version' => '2010-03-31',
         ));
     }
 
@@ -30,25 +29,26 @@ final class SNSPublisher implements Publisher
         return $this->client->publish($message);
     }
 
-    private function prepare($message) {
-		return [
-			'TopicArn'          => $this->topic_arn,
-			'Message'           => $message,
-			'MessageAttributes' => [
-				'causationId'   => [
-					'DataType'    => 'String',
-					'StringValue' => '0',
-				],
-				'messageId'     => [
-					'DataType'    => 'String',
-					'StringValue' => $this->uuidProvider->uuid(),
-				],
-				'correlationId' => [
-					'DataType'    => 'String',
-					'StringValue' => $this->uuidProvider->uuid(),
-				],
-			],
-			'Subject'           => 'Pushy',
-		];
+    private function prepare($message)
+    {
+        return [
+            'TopicArn' => $this->topic_arn,
+            'Message' => $message,
+            'MessageAttributes' => [
+                'causationId' => [
+                    'DataType' => 'String',
+                    'StringValue' => '0',
+                ],
+                'messageId' => [
+                    'DataType' => 'String',
+                    'StringValue' => $this->uuidProvider->uuid(),
+                ],
+                'correlationId' => [
+                    'DataType' => 'String',
+                    'StringValue' => $this->uuidProvider->uuid(),
+                ],
+            ],
+            'Subject' => 'Pushy',
+        ];
     }
 }
