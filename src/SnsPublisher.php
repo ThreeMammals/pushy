@@ -7,7 +7,7 @@ use Aws\Sns\SnsClient;
 use Aws\Result;
 use Ramsey\Uuid\Uuid;
 
-final class SnsPublisher implements Publisher
+final class SNSPublisher implements Publisher
 {
     protected $client;
     protected $topic_arn;

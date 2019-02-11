@@ -20,8 +20,8 @@ final class PublisherFactory
     {
 				if ($config->type == 'FilePublisher') {
 					return new FilePublisher($config->location, $this->uuidProvider);
-				} else if ($config->type == 'SnsPublisher') {
-					return new SnsPublisher($config->location, $this->uuidProvider);
+				} else if ($config->type == 'SNSPublisher') {
+					return new SNSPublisher($config->location, $this->uuidProvider);
 				} else {
 					throw new Exception('Unrecognised Publisher type');
 				}

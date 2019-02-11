@@ -16,7 +16,7 @@ final class SnsPublisherTest extends TestCase
     function setUp()
     {
         $topic_arn = 'arn:aws:sns:eu-west-1:940731442544:dev-InputEvent';
-        $this->publisher = new \Pushy\SnsPublisher($topic_arn, new \Pushy\UUIDProvider());
+        $this->publisher = new \Pushy\SNSPublisher($topic_arn, new \Pushy\UUIDProvider());
     }
 
     public function testHappyPath(): void

@@ -27,9 +27,9 @@ final class PublisherFactoryTests extends TestCase
 
     public function testShouldReturnSnsPublisher(): void
     {      
-        $type = 'SnsPublisher';
+        $type = 'SNSPublisher';
         $config = (object) ['type' => $type, 'location' => $this->path];
         $publisher = $this->publisherFactory->get($config);
-        $this->assertInstanceOf('\Pushy\SnsPublisher', $publisher);
+        $this->assertInstanceOf('\Pushy\SNSPublisher', $publisher);
     }
 }
