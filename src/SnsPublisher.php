@@ -22,17 +22,17 @@ final class SNSPublisher implements Publisher
         ));
     }
 
-    public function publish($data)
+    public function publish($data, $type)
     {
         $json = json_encode($data);
-        $message = $this->prepare($json);
+        $message = $this->prepare($json, $type);
         return $this->client->publish($message);
     }
 
-    private function prepare($message)
+    private function prepare($message, $type)
     {
         return [
-            'TopicArn' => $this->topic_arn,
+            'TopicArn' => $this->topic_arn . $type,
             'Message' => $message,
             'MessageAttributes' => [
                 'causationId' => [

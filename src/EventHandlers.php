@@ -15,24 +15,24 @@ final class EventHandlers
         $this->data_access = $data_access;
     }
 
-    public function postUpdated($post_ID, $post, $update)
+    public function postUpdated($post_id, $post, $update)
     {
-        $this->publisher->publish($post);
+        $this->publisher->publish($post, 'PostUpdated');
     }
 
     public function postTrashed($post_id)
     {
-        $this->publisher->publish($post_id);
+        $this->publisher->publish($post_id, 'PostTrashed');
     }
 
     public function postRestored($post_id)
     {
-        $this->publisher->publish($post_id);
+        $this->publisher->publish($post_id, 'PostRestored');
     }
 
     public function postDeleted($post_id)
     {
-        $this->publisher->publish($post_id);
+        $this->publisher->publish($post_id, 'PostDeleted');
     }
 
     public function categoriesUpdated($category_id)
@@ -41,17 +41,17 @@ final class EventHandlers
             'hide_empty' => 0,
         ));
 
-        $this->publisher->publish($categories);
+        $this->publisher->publish($categories, 'CategoriesUpdated');
     }
 
     public function menuUpdated($menu_id)
     {
         $menu_items = $this->data_access->getMenu($menu_id);
-        $this->publisher->publish($menu_items);
+        $this->publisher->publish($menu_items, 'MenuUpdated');
     }
 
     public function menuDeleted($menu_id)
     {
-        $this->publisher->publish($menu_id);
+        $this->publisher->publish($menu_id, 'MenuDeleted');
     }
 }

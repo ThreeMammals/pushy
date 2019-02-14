@@ -5,5 +5,5 @@ namespace Pushy;
 
 interface Publisher
 {
-    public function publish($data);
+    public function publish($data, $type);
 }

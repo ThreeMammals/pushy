@@ -17,14 +17,15 @@ final class FilePublisher implements Publisher
         $this->uuidProvider = $uuidProvider;
     }
 
-    public function publish($data)
+    public function publish($data, $type)
     {
-        $location = $this->path . '.json';
-        $message = $this->prepare($data);
+				$messageId = $this->uuidProvider->uuid();
+				$location = $this->path . $type . '-' . $messageId . '.json';
+        $message = $this->prepare($data, $messageId);
         return file_put_contents($location, $message);
     }
 
-    private function prepare($message)
+    private function prepare($message, $messageId)
     {
         return json_encode([
             'Message' => $message,
@@ -35,7 +36,7 @@ final class FilePublisher implements Publisher
                 ],
                 'messageId' => [
                     'DataType' => 'String',
-                    'StringValue' => $this->uuidProvider->uuid(),
+                    'StringValue' => $messageId,
                 ],
                 'correlationId' => [
                     'DataType' => 'String',

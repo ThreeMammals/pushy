@@ -3,6 +3,8 @@ declare (strict_types = 1);
 
 namespace Pushy;
 
+use Exception;
+
 final class PublisherFactory
 {
     protected $uuidProvider;
@@ -19,7 +21,7 @@ final class PublisherFactory
         } else if ($config->type == 'SNSPublisher') {
             return new SNSPublisher($config->location, $this->uuidProvider);
         } else {
-            throw new Exception('Unrecognised Publisher type');
+            return new NothingPublisher();
         }
     }
 }
