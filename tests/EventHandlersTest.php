@@ -25,7 +25,7 @@ final class EventHandlersTest extends TestCase
     {
         $this->publisher->expects($this->once())
             ->method('publish')
-            ->with($this->equalTo(2));
+            ->with($this->equalTo(2), $this->equalTo('PostUpdated'));
 
         $this->event_handlers->postUpdated(1, 2, 3);
     }
@@ -34,7 +34,7 @@ final class EventHandlersTest extends TestCase
     {
         $this->publisher->expects($this->once())
             ->method('publish')
-            ->with($this->equalTo(1));
+            ->with($this->equalTo(1), $this->equalTo('PostTrashed'));
 
         $this->event_handlers->postTrashed(1);
     }
@@ -43,7 +43,7 @@ final class EventHandlersTest extends TestCase
     {
         $this->publisher->expects($this->once())
             ->method('publish')
-            ->with($this->equalTo(1));
+            ->with($this->equalTo(1), $this->equalTo('PostRestored'));
 
         $this->event_handlers->postRestored(1);
     }
@@ -52,7 +52,7 @@ final class EventHandlersTest extends TestCase
     {
         $this->publisher->expects($this->once())
             ->method('publish')
-            ->with($this->equalTo(1));
+            ->with($this->equalTo(1), $this->equalTo('PostDeleted'));
 
         $this->event_handlers->postDeleted(1);
     }
@@ -61,7 +61,7 @@ final class EventHandlersTest extends TestCase
     {
         $this->publisher->expects($this->once())
             ->method('publish')
-            ->with($this->equalTo('foo'));
+            ->with($this->equalTo('foo'), $this->equalTo('CategoriesUpdated'));
 
         $this->data_access->expects($this->once())
             ->method('getCategories')
@@ -80,7 +80,7 @@ final class EventHandlersTest extends TestCase
     {
         $this->publisher->expects($this->once())
             ->method('publish')
-            ->with($this->equalTo('foo'));
+            ->with($this->equalTo('foo'), $this->equalTo('MenuUpdated'));
 
         $this->data_access->expects($this->once())
             ->method('getMenu')
@@ -97,8 +97,35 @@ final class EventHandlersTest extends TestCase
     {
         $this->publisher->expects($this->once())
             ->method('publish')
-            ->with($this->equalTo(1));
+            ->with($this->equalTo(1), $this->equalTo('MenuDeleted'));
 
         $this->event_handlers->menuDeleted(1);
+    }
+
+    public function testMediaUploaded(): void
+    {
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo(1), $this->equalTo('MediaUploaded'));
+
+        $this->event_handlers->mediaUploaded(1);
+    }
+
+    public function testAttachmentUploaded(): void
+    {
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo(1), $this->equalTo('AttachmentUploaded'));
+
+        $this->event_handlers->attachmentUploaded(1);
+    }
+
+    public function testAttachmentDeleted(): void
+    {
+        $this->publisher->expects($this->once())
+            ->method('publish', $this->equalTo('AttachmentDeleted'))
+            ->with($this->equalTo(1));
+
+        $this->event_handlers->attachmentDeleted(1);
     }
 }

@@ -19,8 +19,8 @@ final class FilePublisher implements Publisher
 
     public function publish($data, $type)
     {
-				$messageId = $this->uuidProvider->uuid();
-				$location = $this->path . $type . '-' . $messageId . '.json';
+		$messageId = $this->uuidProvider->uuid();
+		$location = $this->path . $type . '-' . $messageId . '.json';
         $message = $this->prepare($data, $messageId);
         return file_put_contents($location, $message);
     }

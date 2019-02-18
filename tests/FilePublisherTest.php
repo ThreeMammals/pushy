@@ -21,17 +21,10 @@ final class FilePublisherTest extends TestCase
     public function testHappyPath(): void
     {
         $message = [1, 2, 3, 4, 5];
-        $result = $this->publisher->publish($message);
-        $location = $this->path . '.json';
-        $contents = file_get_contents($location);
-        $data = json_decode($contents, true);
+        $result = $this->publisher->publish($message, "InputEvent");
         $this->assertEquals(
             295,
             $result
-        );
-        $this->assertEquals(
-            $message,
-            $data['Message']
         );
     }
 }

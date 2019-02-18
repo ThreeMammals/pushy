@@ -54,4 +54,19 @@ final class EventHandlers
     {
         $this->publisher->publish($menu_id, 'MenuDeleted');
     }
+
+    public function mediaUploaded($id)
+    {
+        $this->publisher->publish($id, 'MediaUploaded');
+    }
+
+    public function attachmentUploaded($id)
+    {
+        $this->publisher->publish($id, 'AttachmentUploaded');
+    }
+
+    public function attachmentDeleted($id)
+    {
+        $this->publisher->publish($id, 'AttachmentDeleted');
+    }
 }

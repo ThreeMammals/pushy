@@ -50,6 +50,15 @@ final class Pushy
 
         // This hook runs whenever a menu is deleted
         add_action('wp_delete_nav_menu', array($this, 'menuDeleted'), 10);
+
+        // This hook runs whenever a media is uploaded
+        add_filter('wp_handle_upload_prefilter', array($this, 'mediaUploaded'));
+
+        // This hook runs whenever a attachment is uploaded
+        add_action('add_attachment', array($this, 'attachmentUploaded'));
+
+        // This hook runs whenever a attachment is deleted
+        add_action('delete_attachment', array($this, 'attachmentDeleted'));
     }
 
     public function getConfig()
@@ -109,6 +118,22 @@ final class Pushy
     public function menuDeleted($menu_id)
     {
         $this->eventHandlers->menuDeleted($menu_id);
+    }
+
+    public function mediaUploaded($id)
+    {
+        $this->eventHandlers->mediaUploaded($id);
+        return $id;
+    }
+
+    public function attachmentUploaded($id)
+    {
+        $this->eventHandlers->attachmentUploaded($id);
+    }
+
+    public function attachmentDeleted($id)
+    {
+        $this->eventHandlers->attachmentDeleted($id);
     }
 }
 
