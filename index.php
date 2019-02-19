@@ -59,6 +59,9 @@ final class Pushy
 
         // This hook runs whenever a attachment is deleted
         add_action('delete_attachment', array($this, 'attachmentDeleted'));
+
+        // This hook runs whenever a page is published
+        add_action('publish_page', array($this, 'pageUpdated'));
     }
 
     public function getConfig()
@@ -134,6 +137,11 @@ final class Pushy
     public function attachmentDeleted($id)
     {
         $this->eventHandlers->attachmentDeleted($id);
+    }
+
+    public function pageUpdated($id)
+    {
+        $this->eventHandlers->pageUpdated($id);
     }
 }
 

@@ -69,4 +69,9 @@ final class EventHandlers
     {
         $this->publisher->publish($id, 'AttachmentDeleted');
     }
+
+    public function pageUpdated($id)
+    {
+        $this->publisher->publish($id, 'PageUpdated');
+    }
 }

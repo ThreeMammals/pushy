@@ -128,4 +128,13 @@ final class EventHandlersTest extends TestCase
 
         $this->event_handlers->attachmentDeleted(1);
     }
+
+    public function testPageUpdated(): void
+    {
+        $this->publisher->expects($this->once())
+            ->method('publish', $this->equalTo('PageUpdated'))
+            ->with($this->equalTo(1));
+
+        $this->event_handlers->pageUpdated(1);
+    }
 }
