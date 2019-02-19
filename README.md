@@ -50,5 +50,5 @@ I do `./vendor/bin/phpunit --bootstrap tests/autoload.php tests/`
 
 ## Useful composer stuff I forget
 
-php composer.phar require package-name
-php composer.phar install
+`php composer.phar require package-name`
+`php composer.phar install`
