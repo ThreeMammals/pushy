@@ -26,7 +26,7 @@ After you install Pushy as a wordpress plugin you will get a section added under
 
 action save_post post_type post and post_status publish publishes PostUpdated event
 action save_post post_type revision publishes PostRevision event
-action save_post post_type post and post_status auto-draft publishes PostRevision event
+action save_post post_type post and post_status auto-draft publishes PostDraft event
 action wp_trash_post publishes PostTrashed event
 action untrash_post publishes PostRestored event
 action delete_post publishes PostDeleted event
