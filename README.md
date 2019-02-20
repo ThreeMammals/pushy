@@ -35,6 +35,7 @@ filter wp_handle_upload_prefilter publishes MediaUploaded event
 action add_attachment publishes AttachmentUploaded event
 action delete_attachment publishes AttachmentDeleted event
 action publish_page publishes PageUpdated event
+action updated_postmeta publishes PostMetaUpdated event
 
 These events all contain the data serialised as json that is passed into the hook by Wordpress. Some of them make additonal data fetches.
 
