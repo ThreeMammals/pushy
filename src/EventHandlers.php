@@ -17,7 +17,11 @@ final class EventHandlers
 
     public function postUpdated($post_id, $post, $update)
     {
-        $this->publisher->publish($post, 'PostUpdated');
+        if($post->post_type == 'post') {
+            $this->publisher->publish($post, 'PostUpdated');
+        } else if($post->post_type == 'revision') {
+            $this->publisher->publish($post, 'PostRevision');
+        }
     }
 
     public function postTrashed($post_id)
@@ -79,5 +83,14 @@ final class EventHandlers
     {
         $meta_data = (object) ['id' => $id, 'object_id' => $object_id, 'meta_key' => $meta_key, 'meta_value' => $meta_value];
         $this->publisher->publish($meta_data, 'PostMetaUpdated');
+    }
+
+    public function tagsUpdated($tag_id)
+    {
+        $tags = $this->data_access->getTags(array(
+            'hide_empty' => 0,
+        ));
+
+        $this->publisher->publish($tags, 'TagsUpdated');
     }
 }

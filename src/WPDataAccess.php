@@ -19,4 +19,12 @@ final class WPDataAccess implements DataAccess
         $menu_items = wp_get_nav_menu_items($id);
         return $menu_items;
     }
+
+    public function getTags()
+    {
+        $tags = get_tags(array(
+            'hide_empty' => 0,
+        ));
+        return $tags;
+    }
 }

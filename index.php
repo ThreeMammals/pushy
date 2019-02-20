@@ -39,12 +39,6 @@ final class Pushy
         // This hook runs when a trashed post is deleted
         add_action('delete_post', array($this, 'postDeleted'), 10);
 
-        // This hook runs whenever a CRUD action happens on categories
-        add_action('add_category_form_pre', array($this, 'categoriesUpdated'), 10, 1);
-        add_action('edit_category', array($this, 'categoriesUpdated'), 10, 1);
-        add_action('delete_category', array($this, 'categoriesUpdated'), 10, 1);
-        add_action('create_category', array($this, 'categoriesUpdated'), 10, 1);
-
         // This hook runs whenever a menu is updated
         add_action('wp_update_nav_menu', array($this, 'menuUpdated'), 10);
 
@@ -65,6 +59,20 @@ final class Pushy
 
         // This hook runs whenever post meta is updated
         add_action('updated_postmeta', array($this, 'postMetaUpdated'), 10, 4);
+
+        // This hook runs whenever a CRUD action happens on tags
+        // todo - make these granular?
+        add_action('add_tag_form_pre', array($this, 'tagsUpdated'), 10, 1);
+        add_action('edit_post_tag', array($this, 'tagsUpdated'), 10, 1);
+        add_action('delete_post_tag', array($this, 'tagsUpdated'), 10, 1);
+        add_action('create_post_tag', array($this, 'tagsUpdated'), 10, 1);
+
+        // This hook runs whenever a CRUD action happens on categories
+        // todo - make these granular?
+        add_action('add_category_form_pre', array($this, 'categoriesUpdated'), 10, 1);
+        add_action('edit_category', array($this, 'categoriesUpdated'), 10, 1);
+        add_action('delete_category', array($this, 'categoriesUpdated'), 10, 1);
+        add_action('create_category', array($this, 'categoriesUpdated'), 10, 1);
     }
 
     public function getConfig()
@@ -114,6 +122,11 @@ final class Pushy
     public function categoriesUpdated($category_id)
     {
         $this->eventHandlers->categoriesUpdated($category_id);
+    }
+
+    public function tagsUpdated($tag_id)
+    {
+        $this->eventHandlers->tagsUpdated($tag_id);
     }
 
     public function menuUpdated($menu_id)

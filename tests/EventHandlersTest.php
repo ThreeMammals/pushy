@@ -23,11 +23,24 @@ final class EventHandlersTest extends TestCase
 
     public function testPostUpdated(): void
     {
+        $post = (object) ['post_type' => 'post'];
+
         $this->publisher->expects($this->once())
             ->method('publish')
-            ->with($this->equalTo(2), $this->equalTo('PostUpdated'));
+            ->with($this->equalTo($post), $this->equalTo('PostUpdated'));
 
-        $this->event_handlers->postUpdated(1, 2, 3);
+        $this->event_handlers->postUpdated(1, $post, 3);
+    }
+
+    public function testPostRevision(): void
+    {
+        $post = (object) ['post_type' => 'revision'];
+
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo($post), $this->equalTo('PostRevision'));
+
+        $this->event_handlers->postUpdated(1, $post, 3);
     }
 
     public function testPostTrashed(): void
