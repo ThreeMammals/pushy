@@ -23,7 +23,7 @@ final class EventHandlersTest extends TestCase
 
     public function testPostUpdated(): void
     {
-        $post = (object) ['post_type' => 'post'];
+        $post = (object) ['post_type' => 'post', 'post_status' => 'publish'];
 
         $this->publisher->expects($this->once())
             ->method('publish')
@@ -39,6 +39,17 @@ final class EventHandlersTest extends TestCase
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('PostRevision'));
+
+        $this->event_handlers->postUpdated(1, $post, 3);
+    }
+
+    public function testPostDraft(): void
+    {
+        $post = (object) ['post_type' => 'post', 'post_status' => 'auto-draft'];
+
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo($post), $this->equalTo('PostDraft'));
 
         $this->event_handlers->postUpdated(1, $post, 3);
     }

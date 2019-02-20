@@ -17,10 +17,12 @@ final class EventHandlers
 
     public function postUpdated($post_id, $post, $update)
     {
-        if($post->post_type == 'post') {
+        if($post->post_type == 'post' && $post->post_status == 'publish') {
             $this->publisher->publish($post, 'PostUpdated');
         } else if($post->post_type == 'revision') {
             $this->publisher->publish($post, 'PostRevision');
+        } else if($post->post_type == 'post' && $post->post_status == 'auto-draft') {
+            $this->publisher->publish($post, 'PostDraft');
         }
     }
 
