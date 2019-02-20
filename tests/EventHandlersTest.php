@@ -137,4 +137,15 @@ final class EventHandlersTest extends TestCase
 
         $this->event_handlers->pageUpdated(1);
     }
+
+    public function testPostMetaUpdated(): void
+    {
+        $meta_data = (object) ['id' => 1, 'object_id' => 2, 'meta_key' => 3, 'meta_value' => 4];
+
+        $this->publisher->expects($this->once())
+            ->method('publish', $this->equalTo('PostMetaUpdated'))
+            ->with($this->equalTo($meta_data));
+
+        $this->event_handlers->postMetaUpdated(1, 2, 3, 4);
+    }
 }

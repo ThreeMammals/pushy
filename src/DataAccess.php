@@ -6,5 +6,5 @@ namespace Pushy;
 interface DataAccess
 {
     public function getCategories();
-    public function getMenu($menu_id);
+    public function getMenu($id);
 }

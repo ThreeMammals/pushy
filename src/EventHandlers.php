@@ -74,4 +74,10 @@ final class EventHandlers
     {
         $this->publisher->publish($id, 'PageUpdated');
     }
+
+    public function postMetaUpdated($id, $object_id, $meta_key, $meta_value)
+    {
+        $meta_data = (object) ['id' => $id, 'object_id' => $object_id, 'meta_key' => $meta_key, 'meta_value' => $meta_value];
+        $this->publisher->publish($meta_data, 'PostMetaUpdated');
+    }
 }

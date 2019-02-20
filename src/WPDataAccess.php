@@ -14,9 +14,9 @@ final class WPDataAccess implements DataAccess
         return $categories;
     }
 
-    public function getMenu($menu_id)
+    public function getMenu($id)
     {
-        $menu_items = wp_get_nav_menu_items($menu_id);
+        $menu_items = wp_get_nav_menu_items($id);
         return $menu_items;
     }
 }

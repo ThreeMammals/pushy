@@ -62,6 +62,9 @@ final class Pushy
 
         // This hook runs whenever a page is published
         add_action('publish_page', array($this, 'pageUpdated'));
+
+        // This hook runs whenever post meta is updated
+        add_action('updated_postmeta', array($this, 'postMetaUpdated'), 10, 4);
     }
 
     public function getConfig()
@@ -142,6 +145,11 @@ final class Pushy
     public function pageUpdated($id)
     {
         $this->eventHandlers->pageUpdated($id);
+    }
+
+    public function postMetaUpdated($id, $object_id, $meta_key, $meta_value)
+    {
+        $this->eventHandlers->postMetaUpdated($id, $object_id, $meta_key, $meta_value);
     }
 }
 
