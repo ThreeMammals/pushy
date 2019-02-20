@@ -46,4 +46,16 @@ class DataAccessTest extends \WP_Mock\Tools\TestCase
 
         $this->assertEquals([1, 2, 3], $result);
     }
+
+    public function testGetTags()
+    {
+        \WP_Mock::userFunction('get_tags', array(
+            'times' => 1,
+            'return' => [1, 2, 3],
+        ));
+
+        $result = $this->$data_access->getTags();
+
+        $this->assertEquals([1, 2, 3], $result);
+    }
 }
