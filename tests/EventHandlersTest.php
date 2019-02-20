@@ -161,4 +161,23 @@ final class EventHandlersTest extends TestCase
 
         $this->event_handlers->postMetaUpdated(1, 2, 3, 4);
     }
+
+    public function testTagsUpdated(): void
+    {
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo('foo'), $this->equalTo('TagsUpdated'));
+
+        $this->data_access->expects($this->once())
+            ->method('getTags')
+            ->willReturn('foo');
+
+        $this->data_access->expects($this->once())
+            ->method('getTags')
+            ->with($this->equalTo(array(
+                'hide_empty' => 0,
+            )));
+
+        $this->event_handlers->tagsUpdated(1);
+    }
 }

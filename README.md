@@ -24,7 +24,8 @@ After you install Pushy as a wordpress plugin you will get a section added under
 
 ## What events are published?
 
-action save_post publishes PostUpdated event
+action save_post post_type post publishes PostUpdated event
+action save_post post_type revision publishes PostRevision event
 action wp_trash_post publishes PostTrashed event
 action untrash_post publishes PostRestored event
 action delete_post publishes PostDeleted event
@@ -36,6 +37,7 @@ action add_attachment publishes AttachmentUploaded event
 action delete_attachment publishes AttachmentDeleted event
 action publish_page publishes PageUpdated event
 action updated_postmeta publishes PostMetaUpdated event
+action add_tag_form_pre, edit_post_tag, delete_post_tag, create_post_tag publishes TagsUpdated event
 
 These events all contain the data serialised as json that is passed into the hook by Wordpress. Some of them make additonal data fetches.
 
