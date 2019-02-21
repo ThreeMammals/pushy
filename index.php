@@ -27,11 +27,8 @@ final class Pushy
 
     public function run()
     {
-        // This hook runs on every post save, update etc
+        // This hook runs on every post save, update, trash etc
         add_action('save_post', array($this, 'postUpdated'), 10, 3);
-
-        // This hook runs when a post is trashed
-        add_action('wp_trash_post', array($this, 'postTrashed'), 10);
 
         // This hook runs when a post is restored
         add_action('untrash_post', array($this, 'postRestored'), 10);
@@ -68,14 +65,12 @@ final class Pushy
         
         // This hook runs whenever a CRUD action happens on tags
         // todo - make these granular?
-        add_action('add_tag_form_pre', array($this, 'tagsUpdated'), 10, 1);
         add_action('edit_post_tag', array($this, 'tagsUpdated'), 10, 1);
         add_action('delete_post_tag', array($this, 'tagsUpdated'), 10, 1);
         add_action('create_post_tag', array($this, 'tagsUpdated'), 10, 1);
 
         // This hook runs whenever a CRUD action happens on categories
         // todo - make these granular?
-        add_action('add_category_form_pre', array($this, 'categoriesUpdated'), 10, 1);
         add_action('edit_category', array($this, 'categoriesUpdated'), 10, 1);
         add_action('delete_category', array($this, 'categoriesUpdated'), 10, 1);
         add_action('create_category', array($this, 'categoriesUpdated'), 10, 1);

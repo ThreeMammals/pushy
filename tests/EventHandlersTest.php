@@ -32,6 +32,17 @@ final class EventHandlersTest extends TestCase
         $this->event_handlers->postUpdated(1, $post, 3);
     }
 
+    public function testPrivatePostUpdated(): void
+    {
+        $post = (object) ['post_type' => 'post', 'post_status' => 'private'];
+
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo($post), $this->equalTo('PostUpdated'));
+
+        $this->event_handlers->postUpdated(1, $post, 3);
+    }
+
     public function testPageUpdated(): void
     {
         $post = (object) ['post_type' => 'page', 'post_status' => 'publish'];
@@ -54,9 +65,20 @@ final class EventHandlersTest extends TestCase
         $this->event_handlers->postUpdated(1, $post, 3);
     }
 
-    public function testPostDraft(): void
+    public function testPostAutoDraft(): void
     {
         $post = (object) ['post_type' => 'post', 'post_status' => 'auto-draft'];
+
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo($post), $this->equalTo('PostDraft'));
+
+        $this->event_handlers->postUpdated(1, $post, 3);
+    }
+
+    public function testPostDraft(): void
+    {
+        $post = (object) ['post_type' => 'post', 'post_status' => 'draft'];
 
         $this->publisher->expects($this->once())
             ->method('publish')
@@ -87,14 +109,58 @@ final class EventHandlersTest extends TestCase
         $this->event_handlers->postUpdated(1, $post, 3);
     }
 
-    public function testPostTrashed(): void
+    public function testNavMenuItem(): void
     {
+        $post = (object) ['post_type' => 'nav_menu_item', 'post_status' => 'publish'];
+
         $this->publisher->expects($this->once())
             ->method('publish')
-            ->with($this->equalTo(1), $this->equalTo('PostTrashed'));
+            ->with($this->equalTo($post), $this->equalTo('MenuItemPublished'));
 
-        $this->event_handlers->postTrashed(1);
+        $this->event_handlers->postUpdated(1, $post, 3);
     }
+
+    public function testPageFuture(): void
+    {
+        $post = (object) ['post_type' => 'page', 'post_status' => 'future'];
+
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo($post), $this->equalTo('FuturePageUpdated'));
+
+        $this->event_handlers->postUpdated(1, $post, 3);
+    }
+
+    public function testPostFuture(): void
+    {
+        $post = (object) ['post_type' => 'post', 'post_status' => 'future'];
+
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo($post), $this->equalTo('FuturePostUpdated'));
+
+        $this->event_handlers->postUpdated(1, $post, 3);
+    }
+
+    public function testPostTrashed(): void
+    {
+        $post = (object) ['post_type' => 'post', 'post_status' => 'trash'];
+
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo($post), $this->equalTo('PostTrashed'));
+
+        $this->event_handlers->postUpdated(1, $post, 3);
+    }
+
+    // public function testPostTrashed(): void
+    // {
+    //     $this->publisher->expects($this->once())
+    //         ->method('publish')
+    //         ->with($this->equalTo(1), $this->equalTo('PostTrashed'));
+
+    //     $this->event_handlers->postTrashed(1);
+    // }
 
     public function testPostRestored(): void
     {

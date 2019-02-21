@@ -20,16 +20,25 @@ final class EventHandlers
         // todo this is meh
         if ($post->post_type == 'post' && $post->post_status == 'publish') {
             $this->publisher->publish($post, 'PostUpdated');
+        } else if ($post->post_type == 'post' && $post->post_status == 'private') {
+            $this->publisher->publish($post, 'PostUpdated');
+        } else if ($post->post_type == 'post' && $post->post_status == 'trash') {
+            $this->publisher->publish($post, 'PostTrashed');
         } else if ($post->post_type == 'revision') {
             $this->publisher->publish($post, 'PostRevision');
-        } else if ($post->post_type == 'post' && $post->post_status == 'auto-draft') {
+        } else if ($post->post_type == 'post' && ($post->post_status == 'auto-draft' || $post->post_status == 'draft')) {
             $this->publisher->publish($post, 'PostDraft');
         } else if ($post->post_type == 'page' && $post->post_status == 'publish') {
             $this->publisher->publish($post, 'PageUpdated');
-        } else if ($post->post_type == 'page' && ($post->post_status == 'auto-draft' || $post->post_status == 'draft' )) {
+        } else if ($post->post_type == 'page' && ($post->post_status == 'auto-draft' || $post->post_status == 'draft')) {
             $this->publisher->publish($post, 'PageDraft');
-        }
-        else {
+        } else if ($post->post_type == 'nav_menu_item' && $post->post_status == 'publish') {
+            $this->publisher->publish($post, 'MenuItemPublished');
+        } else if ($post->post_type == 'page' && $post->post_status == 'future') {
+            $this->publisher->publish($post, 'FuturePageUpdated');
+        } else if ($post->post_type == 'post' && $post->post_status == 'future') {
+            $this->publisher->publish($post, 'FuturePostUpdated');
+        } else {
             $this->publisher->publish($post, 'UnknownPost');
         }
     }
