@@ -54,12 +54,18 @@ final class Pushy
         // This hook runs whenever a attachment is deleted
         add_action('delete_attachment', array($this, 'attachmentDeleted'));
 
+        add_action('update_attachment', array($this, 'attachmentUpdated'));
+
         // This hook runs whenever a page is published
-        add_action('publish_page', array($this, 'pageUpdated'));
+        add_action('publish_page', array($this, 'pagePublished'));
 
         // This hook runs whenever post meta is updated
         add_action('updated_postmeta', array($this, 'postMetaUpdated'), 10, 4);
-
+        
+        //todo do the ones below do anything?
+        // add_action('added_postmeta', array($this, 'postMetaUpdated'), 10, 4);
+        // add_action('deleted_postmeta', array($this, 'postMetaUpdated'), 10, 4);
+        
         // This hook runs whenever a CRUD action happens on tags
         // todo - make these granular?
         add_action('add_tag_form_pre', array($this, 'tagsUpdated'), 10, 1);
@@ -155,9 +161,14 @@ final class Pushy
         $this->eventHandlers->attachmentDeleted($id);
     }
 
-    public function pageUpdated($id)
+    public function attachmentUpdated($id)
     {
-        $this->eventHandlers->pageUpdated($id);
+        $this->eventHandlers->attachmentUpdated($id);
+    }
+
+    public function pagePublished($id)
+    {
+        $this->eventHandlers->pagePublished($id);
     }
 
     public function postMetaUpdated($id, $object_id, $meta_key, $meta_value)

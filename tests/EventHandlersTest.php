@@ -32,6 +32,17 @@ final class EventHandlersTest extends TestCase
         $this->event_handlers->postUpdated(1, $post, 3);
     }
 
+    public function testPageUpdated(): void
+    {
+        $post = (object) ['post_type' => 'page', 'post_status' => 'publish'];
+
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo($post), $this->equalTo('PageUpdated'));
+
+        $this->event_handlers->postUpdated(1, $post, 3);
+    }
+
     public function testPostRevision(): void
     {
         $post = (object) ['post_type' => 'revision'];
@@ -50,6 +61,28 @@ final class EventHandlersTest extends TestCase
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('PostDraft'));
+
+        $this->event_handlers->postUpdated(1, $post, 3);
+    }
+
+    public function testPageDraft(): void
+    {
+        $post = (object) ['post_type' => 'page', 'post_status' => 'draft'];
+
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo($post), $this->equalTo('PageDraft'));
+
+        $this->event_handlers->postUpdated(1, $post, 3);
+    }
+
+    public function testPageAutoDraft(): void
+    {
+        $post = (object) ['post_type' => 'page', 'post_status' => 'auto-draft'];
+
+        $this->publisher->expects($this->once())
+            ->method('publish')
+            ->with($this->equalTo($post), $this->equalTo('PageDraft'));
 
         $this->event_handlers->postUpdated(1, $post, 3);
     }
@@ -153,13 +186,22 @@ final class EventHandlersTest extends TestCase
         $this->event_handlers->attachmentDeleted(1);
     }
 
-    public function testPageUpdated(): void
+    public function testAttachmentUpdated(): void
     {
         $this->publisher->expects($this->once())
-            ->method('publish', $this->equalTo('PageUpdated'))
+            ->method('publish', $this->equalTo('AttachmentUpdated'))
             ->with($this->equalTo(1));
 
-        $this->event_handlers->pageUpdated(1);
+        $this->event_handlers->attachmentUpdated(1);
+    }
+
+    public function testPagePublished(): void
+    {
+        $this->publisher->expects($this->once())
+            ->method('publish', $this->equalTo('PagePublished'))
+            ->with($this->equalTo(1));
+
+        $this->event_handlers->pagePublished(1);
     }
 
     public function testPostMetaUpdated(): void
