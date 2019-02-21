@@ -27,6 +27,9 @@ After you install Pushy as a wordpress plugin you will get a section added under
 action save_post post_type post and post_status publish publishes PostUpdated event
 action save_post post_type revision publishes PostRevision event
 action save_post post_type post and post_status auto-draft publishes PostDraft event
+action save_post post_type page and post_status auto-draft publishes PageDraft event
+action save_post post_type page and post_status draft publishes PageDraft event
+action save_post post_type page and post_status publish publishes PageUpdated event
 action wp_trash_post publishes PostTrashed event
 action untrash_post publishes PostRestored event
 action delete_post publishes PostDeleted event
@@ -36,7 +39,8 @@ action wp_delete_nav_menu publishes MenuDeleted event
 filter wp_handle_upload_prefilter publishes MediaUploaded event
 action add_attachment publishes AttachmentUploaded event
 action delete_attachment publishes AttachmentDeleted event
-action publish_page publishes PageUpdated event
+action update_attachment publishes AttachmentUpdated event
+action publish_page publishes PagePublished event
 action updated_postmeta publishes PostMetaUpdated event
 action add_tag_form_pre, edit_post_tag, delete_post_tag, create_post_tag publishes TagsUpdated event
 

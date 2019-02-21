@@ -17,12 +17,20 @@ final class EventHandlers
 
     public function postUpdated($post_id, $post, $update)
     {
+        // todo this is meh
         if ($post->post_type == 'post' && $post->post_status == 'publish') {
             $this->publisher->publish($post, 'PostUpdated');
         } else if ($post->post_type == 'revision') {
             $this->publisher->publish($post, 'PostRevision');
         } else if ($post->post_type == 'post' && $post->post_status == 'auto-draft') {
             $this->publisher->publish($post, 'PostDraft');
+        } else if ($post->post_type == 'page' && $post->post_status == 'publish') {
+            $this->publisher->publish($post, 'PageUpdated');
+        } else if ($post->post_type == 'page' && ($post->post_status == 'auto-draft' || $post->post_status == 'draft' )) {
+            $this->publisher->publish($post, 'PageDraft');
+        }
+        else {
+            $this->publisher->publish($post, 'UnknownPost');
         }
     }
 
@@ -76,9 +84,14 @@ final class EventHandlers
         $this->publisher->publish($id, 'AttachmentDeleted');
     }
 
-    public function pageUpdated($id)
+    public function attachmentUpdated($id)
     {
-        $this->publisher->publish($id, 'PageUpdated');
+        $this->publisher->publish($id, 'AttachmentUpdated');
+    }
+
+    public function pagePublished($id)
+    {
+        $this->publisher->publish($id, 'PagePublished');
     }
 
     public function postMetaUpdated($id, $object_id, $meta_key, $meta_value)
