@@ -27,4 +27,10 @@ final class WPDataAccess implements DataAccess
         ));
         return $tags;
     }
+
+    public function getPostMeta($id) 
+    {
+        $post_meta = get_post_meta($id);
+        return $post_meta;
+    }
 }

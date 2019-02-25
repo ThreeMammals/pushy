@@ -6,7 +6,7 @@ namespace Pushy\Tests;
 use PHPUnit\Framework\TestCase;
 use Pushy;
 
-class DataAccessTest extends \WP_Mock\Tools\TestCase
+class WPDataAccessTest extends \WP_Mock\Tools\TestCase
 {
 
     protected $data_access;
@@ -55,6 +55,19 @@ class DataAccessTest extends \WP_Mock\Tools\TestCase
         ));
 
         $result = $this->$data_access->getTags();
+
+        $this->assertEquals([1, 2, 3], $result);
+    }
+
+    public function testGetPostMeta()
+    {
+        \WP_Mock::userFunction('get_post_meta', array(
+            'args' => 42,
+            'times' => 1,
+            'return' => [1, 2, 3],
+        ));
+
+        $result = $this->$data_access->getPostMeta(42);
 
         $this->assertEquals([1, 2, 3], $result);
     }

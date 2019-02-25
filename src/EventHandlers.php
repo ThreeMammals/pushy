@@ -17,7 +17,14 @@ final class EventHandlers
 
     public function postUpdated($post_id, $post, $update)
     {
-        // todo this is meh
+        $post_meta = $this->data_access->getPostMeta($post_id);
+
+        // todo - this seems to be the best way to do this?
+        $post = (array)$post;
+        $post['post_meta'] = $post_meta;
+        $post = (object)$post;
+
+        // todo - this is meh
         if ($post->post_type == 'post' && $post->post_status == 'publish') {
             $this->publisher->publish($post, 'PostUpdated');
         } else if ($post->post_type == 'post' && $post->post_status == 'private') {

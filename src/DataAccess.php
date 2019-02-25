@@ -8,4 +8,5 @@ interface DataAccess
     public function getCategories();
     public function getTags();
     public function getMenu($id);
+    public function getPostMeta($id);
 }

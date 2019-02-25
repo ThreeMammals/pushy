@@ -23,144 +23,243 @@ final class EventHandlersTest extends TestCase
 
     public function testPostUpdated(): void
     {
-        $post = (object) ['post_type' => 'post', 'post_status' => 'publish'];
+        $post = (object) ['post_type' => 'post', 'post_status' => 'publish', 'post_meta' => 'foo'];
+        $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('PostUpdated'));
 
-        $this->event_handlers->postUpdated(1, $post, 3);
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->willReturn('foo');
+
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->with($this->equalTo($post_id));
+
+        $this->event_handlers->postUpdated($post_id, $post, 3);
     }
 
     public function testPrivatePostUpdated(): void
     {
-        $post = (object) ['post_type' => 'post', 'post_status' => 'private'];
+        $post = (object) ['post_type' => 'post', 'post_status' => 'private', 'post_meta' => 'foo'];
+        $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('PostUpdated'));
 
-        $this->event_handlers->postUpdated(1, $post, 3);
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->willReturn('foo');
+
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->with($this->equalTo($post_id));
+
+        $this->event_handlers->postUpdated($post_id, $post, 3);
     }
 
     public function testPageUpdated(): void
     {
-        $post = (object) ['post_type' => 'page', 'post_status' => 'publish'];
+        $post = (object) ['post_type' => 'page', 'post_status' => 'publish', 'post_meta' => 'foo'];
+        $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('PageUpdated'));
 
-        $this->event_handlers->postUpdated(1, $post, 3);
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->willReturn('foo');
+
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->with($this->equalTo($post_id));
+
+        $this->event_handlers->postUpdated($post_id, $post, 3);
     }
 
     public function testPostRevision(): void
     {
-        $post = (object) ['post_type' => 'revision'];
+        $post = (object) ['post_type' => 'revision', 'post_meta' => 'foo'];
+        $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('PostRevision'));
 
-        $this->event_handlers->postUpdated(1, $post, 3);
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->willReturn('foo');
+
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->with($this->equalTo($post_id));
+
+        $this->event_handlers->postUpdated($post_id, $post, 3);
     }
 
     public function testPostAutoDraft(): void
     {
-        $post = (object) ['post_type' => 'post', 'post_status' => 'auto-draft'];
+        $post = (object) ['post_type' => 'post', 'post_status' => 'auto-draft', 'post_meta' => 'foo'];
+        $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('PostDraft'));
+        
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->willReturn('foo');
 
-        $this->event_handlers->postUpdated(1, $post, 3);
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->with($this->equalTo($post_id));
+
+        $this->event_handlers->postUpdated($post_id, $post, 3);
     }
 
     public function testPostDraft(): void
     {
-        $post = (object) ['post_type' => 'post', 'post_status' => 'draft'];
+        $post = (object) ['post_type' => 'post', 'post_status' => 'draft', 'post_meta' => 'foo'];
+        $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('PostDraft'));
 
-        $this->event_handlers->postUpdated(1, $post, 3);
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->willReturn('foo');
+
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->with($this->equalTo($post_id));
+
+        $this->event_handlers->postUpdated($post_id, $post, 3);
     }
 
     public function testPageDraft(): void
     {
-        $post = (object) ['post_type' => 'page', 'post_status' => 'draft'];
+        $post = (object) ['post_type' => 'page', 'post_status' => 'draft', 'post_meta' => 'foo'];
+        $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('PageDraft'));
 
-        $this->event_handlers->postUpdated(1, $post, 3);
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->willReturn('foo');
+
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->with($this->equalTo($post_id));
+
+        $this->event_handlers->postUpdated($post_id, $post, 3);
     }
 
     public function testPageAutoDraft(): void
     {
-        $post = (object) ['post_type' => 'page', 'post_status' => 'auto-draft'];
+        $post = (object) ['post_type' => 'page', 'post_status' => 'auto-draft', 'post_meta' => 'foo'];
+        $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('PageDraft'));
 
-        $this->event_handlers->postUpdated(1, $post, 3);
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->willReturn('foo');
+
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->with($this->equalTo($post_id));
+
+        $this->event_handlers->postUpdated($post_id, $post, 3);
     }
 
     public function testNavMenuItem(): void
     {
-        $post = (object) ['post_type' => 'nav_menu_item', 'post_status' => 'publish'];
+        $post = (object) ['post_type' => 'nav_menu_item', 'post_status' => 'publish', 'post_meta' => 'foo'];
+        $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('MenuItemPublished'));
 
-        $this->event_handlers->postUpdated(1, $post, 3);
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->willReturn('foo');
+
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->with($this->equalTo($post_id));
+
+        $this->event_handlers->postUpdated($post_id, $post, 3);
     }
 
     public function testPageFuture(): void
     {
-        $post = (object) ['post_type' => 'page', 'post_status' => 'future'];
+        $post = (object) ['post_type' => 'page', 'post_status' => 'future', 'post_meta' => 'foo'];
+        $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('FuturePageUpdated'));
 
-        $this->event_handlers->postUpdated(1, $post, 3);
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->willReturn('foo');
+
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->with($this->equalTo($post_id));
+
+        $this->event_handlers->postUpdated($post_id, $post, 3);
     }
 
     public function testPostFuture(): void
     {
-        $post = (object) ['post_type' => 'post', 'post_status' => 'future'];
+        $post = (object) ['post_type' => 'post', 'post_status' => 'future', 'post_meta' => 'foo'];
+        $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('FuturePostUpdated'));
 
-        $this->event_handlers->postUpdated(1, $post, 3);
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->willReturn('foo');
+
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->with($this->equalTo($post_id));
+
+        $this->event_handlers->postUpdated($post_id, $post, 3);
     }
 
     public function testPostTrashed(): void
     {
-        $post = (object) ['post_type' => 'post', 'post_status' => 'trash'];
+        $post = (object) ['post_type' => 'post', 'post_status' => 'trash', 'post_meta' => 'foo'];
+        $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
             ->with($this->equalTo($post), $this->equalTo('PostTrashed'));
 
-        $this->event_handlers->postUpdated(1, $post, 3);
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->willReturn('foo');
+
+        $this->data_access->expects($this->once())
+            ->method('getPostMeta')
+            ->with($this->equalTo($post_id));
+
+        $this->event_handlers->postUpdated($post_id, $post, 3);
     }
-
-    // public function testPostTrashed(): void
-    // {
-    //     $this->publisher->expects($this->once())
-    //         ->method('publish')
-    //         ->with($this->equalTo(1), $this->equalTo('PostTrashed'));
-
-    //     $this->event_handlers->postTrashed(1);
-    // }
 
     public function testPostRestored(): void
     {
