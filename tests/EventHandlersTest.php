@@ -81,14 +81,14 @@ final class EventHandlersTest extends TestCase
         $this->event_handlers->postUpdated($post_id, $post, 3);
     }
 
-    public function testPostRevision(): void
+    public function testRevision(): void
     {
         $post = (object) ['post_type' => 'revision', 'post_meta' => 'foo'];
         $post_id = 1;
 
         $this->publisher->expects($this->once())
             ->method('publish')
-            ->with($this->equalTo($post), $this->equalTo('PostRevision'));
+            ->with($this->equalTo($post), $this->equalTo('Revision'));
 
         $this->data_access->expects($this->once())
             ->method('getPostMeta')

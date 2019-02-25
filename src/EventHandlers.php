@@ -32,7 +32,7 @@ final class EventHandlers
         } else if ($post->post_type == 'post' && $post->post_status == 'trash') {
             $this->publisher->publish($post, 'PostTrashed');
         } else if ($post->post_type == 'revision') {
-            $this->publisher->publish($post, 'PostRevision');
+            $this->publisher->publish($post, 'Revision');
         } else if ($post->post_type == 'post' && ($post->post_status == 'auto-draft' || $post->post_status == 'draft')) {
             $this->publisher->publish($post, 'PostDraft');
         } else if ($post->post_type == 'page' && $post->post_status == 'publish') {

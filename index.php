@@ -8,7 +8,7 @@ Version: 0.0.0
 Author URI: http://github.com/TomPallister/
  */
 
-require __DIR__ . '/vendor/autoload.php';
+require 'vendor/autoload.php';
 
 final class Pushy
 {
