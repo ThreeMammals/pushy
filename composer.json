@@ -1,4 +1,6 @@
 {
+    "name": "ThreeMammals/Pushy",
+    "description": "A plugin to make Wordpress headless.",
     "autoload": {
         "classmap": [
             "src/"
