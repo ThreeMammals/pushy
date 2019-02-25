@@ -1,5 +1,5 @@
 {
-    "name": "ThreeMammals/Pushy",
+    "name": "three-mammals/pushy",
     "description": "A plugin to make Wordpress headless.",
     "autoload": {
         "classmap": [
