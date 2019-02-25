@@ -1,6 +1,7 @@
 {
     "name": "three-mammals/pushy",
     "description": "A plugin to make Wordpress headless.",
+    "license": "MIT",
     "autoload": {
         "classmap": [
             "src/"
