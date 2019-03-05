@@ -24,30 +24,30 @@ After you install Pushy as a wordpress plugin you will get a section added under
 
 ## What events are published?
 
-action save_post post_type post and post_status publish publishes PostUpdated event
-action save_post post_type post and post_status private publishes PostUpdated event
-action save_post post_type post and post_status trash publishes PostTrashed event
-action save_post post_type revision publishes Revision event
-action save_post post_type post and post_status draft publishes PostDraft event
-action save_post post_type post and post_status auto-draft publishes PostDraft event
-action save_post post_type page and post_status auto-draft publishes PageDraft event
-action save_post post_type page and post_status draft publishes PageDraft event
-action save_post post_type page and post_status publish publishes PageUpdated event
-action save_post post_type nav_menu_item and post_status publish publishes MenuItemPublished event
-action save_post post_type post and post_status future publishes FuturePostUpdated event
-action save_post post_type page and post_status future publishes FuturePageUpdated event
-action untrash_post publishes PostRestored event
-action delete_post publishes PostDeleted event
-action edit_category, delete_category, create_category publishes CategoriesUpdated event
-action wp_update_nav_menu publishes MenuUpdated event
-action wp_delete_nav_menu publishes MenuDeleted event
-filter wp_handle_upload_prefilter publishes MediaUploaded event
-action add_attachment publishes AttachmentUploaded event
-action delete_attachment publishes AttachmentDeleted event
-action update_attachment publishes AttachmentUpdated event
-action publish_page publishes PagePublished event
-action updated_postmeta publishes PostMetaUpdated event
-action edit_post_tag, delete_post_tag, create_post_tag publishes TagsUpdated event
+- action save_post post_type post and post_status publish publishes PostUpdated event
+- action save_post post_type post and post_status private publishes PostUpdated event
+- action save_post post_type post and post_status trash publishes PostTrashed event
+- action save_post post_type revision publishes Revision event
+- action save_post post_type post and post_status draft publishes PostDraft event
+- action save_post post_type post and post_status auto-draft publishes PostDraft event
+- action save_post post_type page and post_status auto-draft publishes PageDraft event
+- action save_post post_type page and post_status draft publishes PageDraft event
+- action save_post post_type page and post_status publish publishes PageUpdated event
+- action save_post post_type nav_menu_item and post_status publish publishes MenuItemPublished event
+- action save_post post_type post and post_status future publishes FuturePostUpdated event
+- action save_post post_type page and post_status future publishes FuturePageUpdated event
+- action untrash_post publishes PostRestored event
+- action delete_post publishes PostDeleted event
+- action edit_category, delete_category, create_category publishes CategoriesUpdated event
+- action wp_update_nav_menu publishes MenuUpdated event
+- action wp_delete_nav_menu publishes MenuDeleted event
+- filter wp_handle_upload_prefilter publishes MediaUploaded event
+- action add_attachment publishes AttachmentUploaded event
+- action delete_attachment publishes AttachmentDeleted event
+- action update_attachment publishes AttachmentUpdated event
+- action publish_page publishes PagePublished event
+- action updated_postmeta publishes PostMetaUpdated event
+- action edit_post_tag, delete_post_tag, create_post_tag publishes TagsUpdated event
 
 These events all contain the data serialised as json that is passed into the hook by Wordpress. Some of them make additonal data fetches.
 
