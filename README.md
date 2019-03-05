@@ -10,6 +10,10 @@ This pattern is also useful if you need to scale beyond what Wordpress is capabl
 
 This is basically meant to be souped up webhooks.
 
+[![Latest Stable Version](https://poser.pugx.org/three-mammals/pushy/v/stable)](https://packagist.org/packages/three-mammals/pushy)
+[![Total Downloads](https://poser.pugx.org/three-mammals/pushy/downloads)](https://packagist.org/packages/three-mammals/pushy)
+[![License](https://poser.pugx.org/three-mammals/pushy/license)](https://packagist.org/packages/three-mammals/pushy)
+
 ## Why?
 
 My work want to make Wordpress headless but we don't really have time to work on it. I thought it was an interesting idea so started this to see how it might work in terms of pushing data out.
