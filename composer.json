@@ -2,6 +2,7 @@
     "name": "three-mammals/pushy",
     "description": "A plugin to make Wordpress headless.",
     "license": "MIT",
+    "type": "wordpress-plugin",
     "autoload": {
         "classmap": [
             "src/"
@@ -12,6 +13,7 @@
         "10up/wp_mock": "0.4.0"
     },
     "require": {
+        "composer/installers": "~1.0",
         "aws/aws-sdk-php-resources": "^0.3.0",
         "ramsey/uuid": "^3.8"
     }
