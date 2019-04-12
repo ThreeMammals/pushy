@@ -21,6 +21,9 @@
     "require": {
         "composer/installers": "~1.0",
         "aws/aws-sdk-php-resources": "^0.3.0",
-        "ramsey/uuid": "^3.8"
+        "ramsey/uuid": "^3.8",
+        "php-amqplib/php-amqplib": "^2.9",
+        "ext-sockets": "*",
+        "ext-bcmath": "*"
     }
 }

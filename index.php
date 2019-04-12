@@ -96,6 +96,13 @@ final class Pushy
             }
         }
 
+        if ($options['AMQPPublisher'] != null) {
+            if ($options['AMQPPublisher'] == 1) {
+                $config = (object) ['type' => 'AMQPPublisher', 'location' => $location];
+                return $config;
+            }
+        }
+
         $config = (object) ['type' => 'NothingPublisher', 'location' => $location];
         return $config;
     }
@@ -211,6 +218,9 @@ function pushy_sampleoptions_do_page()
 				<tr valign="top"><th scope="row">SNSPublisher</th>
 					<td><input name="pushy_sample[SNSPublisher]" type="checkbox" value="1" <?php checked('1', $options['SNSPublisher']);?> /></td>
 				</tr>
+                <tr valign="top"><th scope="row">AMQPPublisher</th>
+					<td><input name="pushy_sample[AMQPPublisher]" type="checkbox" value="1" <?php checked('1', $options['AMQPPublisher']);?> /></td>
+				</tr>
 				<tr valign="top"><th scope="row">Location</th>
 					<td><input type="text" name="pushy_sample[location]" value="<?php echo $options['location']; ?>" /></td>
 				</tr>
@@ -237,6 +247,12 @@ function pushy_sampleoptions_validate($input)
         $input['SNSPublisher'] = ($input['SNSPublisher'] == 1 ? 1 : 0);
     } else {
         $input['SNSPublisher'] = 0;
+    }
+
+    if (isset($input['AMQPPublisher'])) {
+        $input['AMQPPublisher'] = ($input['AMQPPublisher'] == 1 ? 1 : 0);
+    } else {
+        $input['AMQPPublisher'] = 0;
     }
 
     // Say our second option must be safe text with no HTML tags
