@@ -30,8 +30,7 @@ final class AMQPPublisher implements Publisher
 
     public function publish($data, $type)
     {
-        $json = json_encode($data);
-        $body = json_encode($this->prepare($json, $type));
+        $body = json_encode($this->prepare($data, $type));
         $message = new AMQPMessage($body, array('content_type' => 'application/json', 'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT));
         return $this->channel->basic_publish($message, $this->exchange);
     }
