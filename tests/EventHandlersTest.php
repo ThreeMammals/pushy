@@ -380,6 +380,17 @@ final class EventHandlersTest extends TestCase
         $this->event_handlers->postMetaUpdated(1, 2, 3, 4);
     }
 
+    public function testOptionUpdated(): void
+    {
+        $option = (object) ['option_name' => 1, 'old_value' => 2, 'value' => 3];
+
+        $this->publisher->expects($this->once())
+            ->method('publish', $this->equalTo('OptionUpdated'))
+            ->with($this->equalTo($option));
+
+        $this->event_handlers->optionUpdated(1, 2, 3);
+    }
+
     public function testTagsUpdated(): void
     {
         $this->publisher->expects($this->once())

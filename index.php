@@ -74,6 +74,10 @@ final class Pushy
         add_action('edit_category', array($this, 'categoriesUpdated'), 10, 1);
         add_action('delete_category', array($this, 'categoriesUpdated'), 10, 1);
         add_action('create_category', array($this, 'categoriesUpdated'), 10, 1);
+
+        add_action('updated_option', function( $option_name, $old_value, $value ) {
+            $this->optionUpdated($option_name, $old_value, $value);
+       }, 10, 3);
     }
 
     public function getConfig()
@@ -176,6 +180,11 @@ final class Pushy
     public function postMetaUpdated($id, $object_id, $meta_key, $meta_value)
     {
         $this->eventHandlers->postMetaUpdated($id, $object_id, $meta_key, $meta_value);
+    }
+
+    public function optionUpdated($option_name, $old_value, $value)
+    {
+        $this->eventHandlers->optionUpdated($option_name, $old_value, $value);
     }
 }
 

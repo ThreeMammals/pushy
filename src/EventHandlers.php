@@ -77,6 +77,7 @@ final class EventHandlers
     public function menuUpdated($menu_id)
     {
         $menu_items = $this->data_access->getMenu($menu_id);
+        
         $this->publisher->publish($menu_items, 'MenuUpdated');
     }
 
@@ -113,6 +114,7 @@ final class EventHandlers
     public function postMetaUpdated($id, $object_id, $meta_key, $meta_value)
     {
         $meta_data = (object) ['id' => $id, 'object_id' => $object_id, 'meta_key' => $meta_key, 'meta_value' => $meta_value];
+
         $this->publisher->publish($meta_data, 'PostMetaUpdated');
     }
 
@@ -123,5 +125,12 @@ final class EventHandlers
         ));
 
         $this->publisher->publish($tags, 'TagsUpdated');
+    }
+
+    public function optionUpdated($option_name, $old_value, $value)
+    {
+        $option = (object) ['option_name' => $option_name, 'old_value' => $old_value, 'value' => $value];
+
+        $this->publisher->publish($option, 'OptionUpdated');
     }
 }
