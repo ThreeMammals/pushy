@@ -19,3 +19,7 @@ wp-content/plugins/hello.php
 
 composer.phar
 /vendor/
+tfplan
+.terraform
+terraform.tfstate
+terraform.tfstate.backup

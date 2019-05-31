@@ -55,6 +55,18 @@ After you install Pushy as a wordpress plugin you will get a section added under
 
 These events all contain the data serialised as json that is passed into the hook by Wordpress. Some of them make additonal data fetches.
 
+## Terraform
+
+### AWS
+
+I have setup a simple terraform script to deploy the required SNS topics. A good knowledge of terraform is required to use this because you will probably want to make changes. I have the credentials setup in a normal way locally for AWS cli and I have some helper scripts to execute terraform in from docker.
+
+The AWS terraform provider is set up in a very simple way and you might want to change this :)
+
+From root call ```./infrastructure/terraform/aws/plan.sh``` to create a plan.
+From root call ```./infrastructure/terraform/aws/apply.sh``` to apply the plan and create the resources in AWS.
+From root call ```./infrastructure/terraform/aws/apply.sh``` to destroy created resources.
+
 ## Whats next?
 
 Generally make everything better. At the moment not all hooks that are relavent are supported. Maybe we should fetch more data when doing say PostUpdated? Can we be more accurate with save PostCreated rather than just PostUpdated etc. Can we target specific post types better. Can we do better with media?
