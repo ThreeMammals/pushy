@@ -36,7 +36,8 @@ final class PublisherFactoryTests extends TestCase
     public function testShouldReturnAmqpPublisher(): void
     {
         $type = 'AMQPPublisher';
-        $config = (object) ['type' => $type, 'location' => $this->path];
+        $config = (object) ['type' => $type, 'location' => 'localhost'];
+        // todo mock AMQP?
         $publisher = $this->publisherFactory->get($config);
         $this->assertInstanceOf('\Pushy\AMQPPublisher', $publisher);
     }

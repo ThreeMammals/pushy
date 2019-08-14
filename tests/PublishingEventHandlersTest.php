@@ -6,7 +6,7 @@ namespace Pushy\Tests;
 use PHPUnit\Framework\TestCase;
 use Pushy;
 
-final class EventHandlersTest extends TestCase
+final class PublishingEventHandlers extends TestCase
 {
     protected $publisher;
     protected $data_access;
@@ -18,7 +18,7 @@ final class EventHandlersTest extends TestCase
             ->getMock();
         $this->data_access = $this->getMockBuilder(\Pushy\DataAccess::class)
             ->getMock();
-        $this->event_handlers = new \Pushy\EventHandlers($this->publisher, $this->data_access);
+        $this->event_handlers = new \Pushy\PublishingEventHandlers($this->publisher, $this->data_access);
     }
 
     public function testPostUpdated(): void

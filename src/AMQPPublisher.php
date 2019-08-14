@@ -10,18 +10,19 @@ use PhpAmqpLib\Message\AMQPMessage;
 final class AMQPPublisher implements Publisher
 {
     protected $client;
-    protected $topic_arn;
+    protected $location;
     protected $uuidProvider;
     protected $exchange;
     protected $queue;
 
-    public function __construct($topic_arn, UUIDProvider $uuidProvider)
+    public function __construct($location, UUIDProvider $uuidProvider)
     {
         $this->exchange = 'router';
         $this->queue = 'msgs';
-        $this->topic_arn = $topic_arn;
+        $this->location = $location;
         $this->uuidProvider = $uuidProvider;
-        $this->connection = new AMQPStreamConnection('rabbit', 5672, 'guest', 'guest', '/');
+        // todo unhardcode username and password etc?
+        $this->connection = new AMQPStreamConnection($this->location, 5672, 'guest', 'guest', '/');
         $this->channel = $this->connection->channel();
         $this->channel->queue_declare($this->queue, false, true, false, false);
         $this->channel->exchange_declare($this->exchange, AMQPExchangeType::DIRECT, false, true, false);
@@ -39,7 +40,7 @@ final class AMQPPublisher implements Publisher
     {
         return [
             'Type' => $type,
-            'TopicArn' => $this->topic_arn . $type,
+            'TopicArn' => $type,
             'Message' => $message,
             'MessageAttributes' => [
                 'causationId' => [
