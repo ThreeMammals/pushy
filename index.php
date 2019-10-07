@@ -23,7 +23,7 @@ final class Pushy
         $this->publisher = $publisherFactory->get($config);
         $this->data_access = new \Pushy\WPDataAccess();
         $publishingEventHandlers = new \Pushy\PublishingEventHandlers($this->publisher, $this->data_access);
-        $this->eventHandlers = new QueuingEventHandlers($publishingEventHandlers);
+        $this->eventHandlers = new \Pushy\QueuingEventHandlers($publishingEventHandlers);
     }
 
     public function run()
