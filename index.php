@@ -79,6 +79,9 @@ final class Pushy
         add_action('updated_option', function( $option_name, $old_value, $value ) {
             $this->optionUpdated($option_name, $old_value, $value);
        }, 10, 3);
+
+        // run all the events stored in the queuing events handler  
+        add_action('shutdown', array($this, 'shutdown'));
     }
 
     public function getConfig()
@@ -186,6 +189,11 @@ final class Pushy
     public function optionUpdated($option_name, $old_value, $value)
     {
         $this->eventHandlers->optionUpdated($option_name, $old_value, $value);
+    }
+
+    public function shutdown()
+    {
+        $this->eventHandlers->shutdown();
     }
 }
 
